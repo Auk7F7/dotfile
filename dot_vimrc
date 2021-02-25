@@ -1,0 +1,113 @@
+" 编码设置
+:set fileencodings=utf-8,gbk,gb18030,gb2312
+:set termencoding=utf-8
+:set encoding=utf-8
+
+" 设置缩进
+" 设置 Tab 长度为4个空格
+:set tabstop=4
+" 设置自动缩进长度为4个空格
+:set shiftwidth=4
+
+" 文件类型检测
+:filetype plugin on
+
+" 语法高亮
+:syntax on
+
+" 显示行数
+:set number
+
+" 插件
+call plug#begin('~/.vim/plugged')
+Plug 'kien/rainbow_parentheses.vim'
+Plug 'jiangmiao/auto-pairs'
+Plug 'preservim/nerdtree'
+Plug 'vim-airline/vim-airline'
+Plug 'vim-airline/vim-airline-themes'
+Plug 'arcticicestudio/nord-vim'
+Plug 'Valloric/YouCompleteMe'
+Plug 'dense-analysis/ale'
+call plug#end()
+
+" 插件设置
+" raninbow_paerntheses
+" 颜色设置
+let g:rbpt_colorpairs = [
+    \ ['brown',       'RoyalBlue3'],
+    \ ['Darkblue',    'SeaGreen3'],
+    \ ['darkgray',    'DarkOrchid3'],
+    \ ['darkgreen',   'firebrick3'],
+    \ ['darkcyan',    'RoyalBlue3'],
+    \ ['darkred',     'SeaGreen3'],
+    \ ['darkmagenta', 'DarkOrchid3'],
+    \ ['brown',       'firebrick3'],
+    \ ['gray',        'RoyalBlue3'],
+    \ ['darkmagenta', 'DarkOrchid3'],
+    \ ['Darkblue',    'firebrick3'],
+    \ ['darkgreen',   'RoyalBlue3'],
+    \ ['darkcyan',    'SeaGreen3'],
+    \ ['darkred',     'DarkOrchid3'],
+    \ ['red',         'firebrick3'],
+    \ ]
+" 最大可匹配括号数
+let g:rbpt_max=16
+let g:rbpt_loadcmd_toggle=0
+" 打开 vim 后自动启用插件
+au VimEnter * RainbowParenthesesToggle
+" 开启对圆括号,方括号,大括号的多彩色高亮匹配
+au Syntax * RainbowParenthesesLoadRound
+au Syntax * RainbowParenthesesLoadSquare
+au Syntax * RainbowParenthesesLoadBraces
+
+" auto-pairs
+" 设置需要自动配对的符号
+let g:AutoPairs={'(':')', '[':']', '{':'}', "'":"'", '"':'"'}
+
+" nerdtree
+" 设置 Crtl+n 打开 NERDTree
+map <C-n> :NERDTreeToggle<CR>
+
+" airline
+" 主题设置
+let g:airline_theme='molokai'
+" powerline 字体
+let g:airline_powerline_fonts=1
+" 显示所有的 Buffer
+let g:airline#extensions#tabline#enabled=1
+" Buffer 栏的显示格式
+let g:airline#extensions#tabline#formatter='unique_tail_improved'
+
+" vim 主题设置 
+colorscheme nord
+
+" YouCompleteMe 设置
+let g:ycm_global_ycm_extra_conf='/home/ishikomi/.vim/plugged/YouCompleteMe/.ycm_extra_conf.py'
+" log level
+let g:ycm_server_log_level = 'info'
+" 关闭函数原型预览窗口
+set completeopt=menu,menuone
+let g:ycm_add_preview_to_completeopt = 0
+" 不显示诊断信息
+let g:ycm_show_diagnostics_ui = 0
+" 更改补全触发键
+let g:ycm_key_invoke_completion = '<c-z>'
+" 输入两个字母后自动弹出语义补全
+let g:ycm_semantic_triggers =  {
+			\ 'c,cpp,python,java': ['re!\w{2}'],
+			\ 'cs,lua,javascript': ['re!\w{2}'],
+			\ }
+" whitelist
+let g:ycm_filetype_whitelist = { 
+			\ "c":1,
+			\ "cpp":1, 
+			\ "objc":1,
+			\ "py":1,
+			\ "java":1,
+			\ "html":1,
+			\ "js":1,
+			\ "sh":1,
+			\ "zsh":1,
+			\ "zimbu":1,
+			\ "ini":1,
+			\ }
